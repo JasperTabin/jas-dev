@@ -83,7 +83,7 @@ export const Home = () => {
       </div>
 
       {/* Socials */}
-      <div className="mt-4">
+      {/* <div className="mt-4">
         <h2 
           className="text-sm font-light mb-2"
           style={{ color: 'var(--text-secondary)' }}
@@ -142,7 +142,7 @@ export const Home = () => {
             <FaFileAlt />
           </a>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 };
