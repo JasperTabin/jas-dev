@@ -45,7 +45,7 @@ export const Home = () => {
       </div>
 
       <h3
-        className="text-2xl font-semibold mt-2"
+        className="text-xl font-bold text-[var(--text-primary)] mt-2"
         style={{ color: "var(--text-primary)" }}
       >
         About

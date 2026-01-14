@@ -9,7 +9,7 @@ export default function Projects({ projects = defaultProjects }) {
       <div className="max-w-5xl mx-auto">
         <div className="flex items-center justify-between pb-4">
           <h2 
-            className="text-2xl font-semibold"
+            className="text-xl font-bold text-[var(--text-primary)]"
             style={{ color: 'var(--text-primary)' }}
           >
             Pinned Projects

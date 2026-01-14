@@ -32,7 +32,7 @@ export const ResumeTabs = () => {
   return (
     <section id="resume">
       {/* Heading */}
-      <h2 className="pb-4 text-2xl font-semibold text-[var(--text-primary)]">
+      <h2 className="text-xl font-bold text-[var(--text-primary)] mb-4">
         My Career
       </h2>
 
