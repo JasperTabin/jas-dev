@@ -1,137 +1,106 @@
 import { useState } from "react";
 import { resumeData } from "../../Data/resumeData";
 
-const tabs = ["Work", "Education"];
+const TABS = ["Work", "Education"];
 
-export const ResumeTabs = () => {
-  const [active, setActive] = useState("Work");
+const Avatar = ({ logo, title }) => {
+  const initials = title
+    .split(" ")
+    .slice(0, 2)
+    .map(word => word[0])
+    .join("")
+    .toUpperCase();
 
-  const Avatar = ({ logo, title }) => (
+  return (
     <div className="relative z-10 flex-shrink-0">
-      <div 
-        className="w-12 h-12 rounded-full border-2 overflow-hidden flex items-center justify-center"
-        style={{ 
-          backgroundColor: 'var(--secondary)',
-          borderColor: 'var(--border)'
-        }}
-      >
+      <div className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border-2 border-[var(--border)] bg-[var(--secondary)]">
         {logo ? (
-          <img src={logo} alt={title} className="w-full h-full object-cover" />
+          <img src={logo} alt={title} className="h-full w-full object-cover" />
         ) : (
-          <span 
-            className="text-sm font-semibold"
-            style={{ color: 'var(--text-primary)' }}
-          >
-            {title
-              .split(" ")
-              .slice(0, 2)
-              .map((w) => w[0])
-              .join("")
-              .toUpperCase()}
+          <span className="text-sm font-semibold text-[var(--text-primary)]">
+            {initials}
           </span>
         )}
       </div>
     </div>
   );
+};
+
+export const ResumeTabs = () => {
+  const [activeTab, setActiveTab] = useState("Work");
 
   return (
     <section id="resume">
-      
-      <h2 
-        className="text-2xl font-semibold pb-4"
-        style={{ color: 'var(--text-primary)' }}
-      >
+      {/* Heading */}
+      <h2 className="pb-4 text-2xl font-semibold text-[var(--text-primary)]">
         My Career
       </h2>
 
-      <div 
-        className="mb-2 grid w-full grid-cols-2 rounded-lg p-1 h-9"
-        style={{ backgroundColor: 'var(--border)' }}
-      >
-        {tabs.map((tab) => (
-          <button
-            key={tab}
-            onClick={() => setActive(tab)}
-            className={`inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium transition-all
-              ${
-                active === tab
-                  ? "shadow font-semibold"
-                  : ""
-              }`}
-            style={{
-              backgroundColor: active === tab ? 'var(--primary)' : 'transparent',
-              color: active === tab ? 'var(--text-primary)' : 'var(--text-secondary)'
-            }}
-          >
-            {tab}
-          </button>
-        ))}
+      {/* Tabs */}
+      <div className="mb-2 grid h-9 w-full grid-cols-2 rounded-lg bg-[var(--border)] p-1">
+        {TABS.map(tab => {
+          const isActive = activeTab === tab;
+
+          return (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`inline-flex items-center justify-center rounded-md px-3 py-1 text-sm font-medium transition-all
+                ${
+                  isActive
+                    ? "bg-[var(--primary)] font-semibold text-[var(--text-primary)] shadow"
+                    : "text-[var(--text-secondary)]"
+                }`}
+            >
+              {tab}
+            </button>
+          );
+        })}
       </div>
 
-      <div 
-        className="border rounded-xl relative"
-        style={{ borderColor: 'var(--border)' }}
-      >
-        <div 
-          className="absolute left-12 top-0 bottom-0 w-px z-0" 
-          style={{ backgroundColor: 'var(--border)' }}
-        />
+      {/* Timeline */}
+      <div className="relative rounded-xl border border-[var(--border)]">
+        {/* Vertical line */}
+        <div className="absolute left-12 top-0 bottom-0 z-0 w-px bg-[var(--border)]" />
 
-        <div className="p-6 space-y-8 relative z-10">
-          {resumeData[active].map((item, idx) => (
-            <div key={idx} className="flex gap-4 items-start">
-              <div className="flex flex-col items-center">
-                <Avatar logo={item.logo} title={item.title} />
-              </div>
+        <div className="relative z-10 space-y-8 p-6">
+          {resumeData[activeTab].map((item, index) => (
+            <div key={index} className="flex items-start gap-4">
+              <Avatar logo={item.logo} title={item.title} />
 
               <div>
                 {item.date && (
-                  <p 
-                    className="text-xs"
-                    style={{ color: 'var(--text-secondary)' }}
-                  >
+                  <p className="text-xs text-[var(--text-secondary)]">
                     {item.date}
                   </p>
                 )}
+
                 {item.title && (
-                  <h3 
-                    className="font-semibold"
-                    style={{ color: 'var(--text-primary)' }}
-                  >
+                  <h3 className="font-semibold text-[var(--text-primary)]">
                     {item.title}
                   </h3>
                 )}
+
                 {item.place && (
-                  <p 
-                    className="text-sm"
-                    style={{ color: 'var(--text-primary)' }}
-                  >
+                  <p className="text-sm text-[var(--text-primary)]">
                     {item.place}
                   </p>
                 )}
 
                 {item.details?.length > 0 && (
-                  <ul 
-                    className="list-disc list-inside text-sm mt-2 space-y-1"
-                    style={{ color: 'var(--text-secondary)' }}
-                  >
-                    {item.details.map((d, i) => (
-                      <li key={i}>{d}</li>
+                  <ul className="mt-2 list-inside list-disc space-y-1 text-sm text-[var(--text-secondary)]">
+                    {item.details.map((detail, i) => (
+                      <li key={i}>{detail}</li>
                     ))}
                   </ul>
                 )}
 
                 {item.tags?.length > 0 && (
-                  <div className="flex flex-wrap gap-2 mt-3">
+                  <div className="mt-3 flex flex-wrap gap-2">
                     {item.tags.map((tag, i) => (
                       <span
                         key={i}
-                        className="px-3 py-1 rounded-md text-xs font-medium border"
-                        style={{ 
-                          borderColor: 'var(--border)',
-                          color: 'var(--text-secondary)',
-                          backgroundColor: 'var(--secondary)'
-                        }}
+                        className="rounded-md border border-[var(--border)] bg-[var(--secondary)] px-3 py-1 text-xs font-medium text-[var(--text-secondary)]"
                       >
                         {tag}
                       </span>

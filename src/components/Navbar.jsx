@@ -17,15 +17,7 @@ export const Navbar = () => {
       </Link>
 
       <div className="flex items-center space-x-6 text-sm">
-        {/* <Link
-          to="/projects"
-          className="transition-colors duration-300 hover:opacity-80"
-          style={{ color: 'var(--text-secondary)' }}
-        >
-          Projects
-        </Link> */}
-        
-        {/* Minimal iOS-Style Toggle Switch */}
+
         <button
           onClick={toggleTheme}
           className={`relative inline-flex h-6 w-11 items-center rounded-full border-2 transition-all duration-300 ease-in-out focus:outline-none ${
@@ -37,7 +29,6 @@ export const Navbar = () => {
           aria-checked={isDark}
           aria-label="Toggle dark mode"
         >
-          {/* Moving Circle */}
           <span
             className={`inline-block h-3 w-3 rounded-full transition-transform duration-300 ease-in-out ${
               isDark 

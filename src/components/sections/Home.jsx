@@ -40,40 +40,27 @@ export const Home = () => {
             San Pedro, Philippines
           </div>
 
-          <p className="mt-1 text-xs">
-            Front-end Developer · Web Developer
-          </p>
+          <p className="mt-1 text-xs">Front-end Developer \ Web Developer</p>
         </div>
       </div>
 
-      {/* Brief Description */}
-      
-      <p
-        className="mt-4 max-w-prose text-sm leading-relaxed"
+      <h3
+        className="text-2xl font-semibold mt-2"
         style={{ color: "var(--text-primary)" }}
       >
-        Frontend Developer from the Philippines. I enjoy turning designs into
-        code. When not coding, I'm exploring gaming, music, and coffee shops.
-        Open to new opportunities!
-      </p>
+        About
+      </h3>
 
-      {/* About */}
-      <section className="pt-4">
-        <h2
-          className="text-xl font-semibold"
-          style={{ color: "var(--text-primary)" }}
-        >
-          About
-        </h2>
-        <p
-          className="pt-1 max-w-prose text-sm leading-relaxed"
-          style={{ color: "var(--text-primary)" }}
-        >
-          Graduated in 2025 with a BS in Information Technology, earning honors
-          as Dean's Lister, Best in Capstone, and Cum Laude. Focused on building
-          clean, modern web applications.
-        </p>
-      </section>
+      <p
+        className="mt-2 text-sm leading-relaxed"
+        style={{ color: "var(--text-primary)" }}
+      >
+        I am a fresh BSIT graduate and a Front-end Developer with a strong
+        interest in building clean, responsive, and user-friendly web
+        applications. I have experience working with React, Node.js TypeScript, and
+        modern web technologies, and I am eager to continue learning, improving
+        my skills, and growing in a professional development environment.
+      </p>
     </section>
   );
 };

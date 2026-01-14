@@ -6,6 +6,7 @@ import { Home } from "./components/sections/Home";
 import { Navbar } from "./components/Navbar";
 import { ResumeTabs } from "./components/sections/ResumeTabs";
 import { TechStack } from "./components/sections/TechStack";
+import { About } from "./components/sections/About";
 import Projects from "./components/sections/Projects";
 import Footer from "./components/Footer";
 import Type from "./components/sections/Type";
@@ -39,6 +40,7 @@ function AppContent() {
               <Home />
               <TechStack />
               <ResumeTabs />
+              <About />
               <Projects />
               <Type />
               <Footer />
