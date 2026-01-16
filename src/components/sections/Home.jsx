@@ -1,7 +1,25 @@
 import bannerGif from "/src/assets/Cat-Banner.gif";
-import { MapPin } from "lucide-react";
+import { MapPin, User, Download, Mail } from "lucide-react";
 
 export const Home = () => {
+  const handleDownloadResume = () => {
+    const link = document.createElement("a");
+    link.href = "/public/Tabin.pdf";
+    link.download = "Jasper_Resume.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const handleSendEmail = () => {
+    const email = "tabinjasper@gmail.com";
+    const subject = "Hello Jasper";
+    const body = "Hi Jasper, I would like to connect with you regarding...";
+    window.location.href = `mailto:${email}?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+  };
+
   return (
     <section id="profile">
       {/* Banner */}
@@ -44,10 +62,38 @@ export const Home = () => {
         </div>
       </div>
 
+      {/* Buttons */}
+      <div className="mt-4 flex gap-3">
+        <button
+          onClick={handleDownloadResume}
+          className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium border transition-colors hover:opacity-80"
+          style={{
+            borderColor: "var(--border)",
+            color: "var(--text-primary)",
+          }}
+        >
+          <Download className="h-4 w-4" />
+          Resume
+        </button>
+
+        <button
+          onClick={handleSendEmail}
+          className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium border transition-colors hover:opacity-80"
+          style={{
+            borderColor: "var(--border)",
+            color: "var(--text-primary)",
+          }}
+        >
+          <Mail className="h-4 w-4" />
+          Send Email
+        </button>
+      </div>
+
       <h3
-        className="text-xl font-bold text-[var(--text-primary)] mt-2"
+        className="mt-4 flex items-center gap-2 text-xl font-thin"
         style={{ color: "var(--text-primary)" }}
       >
+        <User className="h-5 w-5" />
         About
       </h3>
 
@@ -57,9 +103,10 @@ export const Home = () => {
       >
         I am a fresh BSIT graduate and a Front-end Developer with a strong
         interest in building clean, responsive, and user-friendly web
-        applications. I have experience working with React, Node.js TypeScript, and
-        modern web technologies, and I am eager to continue learning, improving
-        my skills, and growing in a professional development environment.
+        applications. I have experience working with React, Node.js TypeScript,
+        and modern web technologies, and I am eager to continue learning,
+        improving my skills, and growing in a professional development
+        environment.
       </p>
     </section>
   );

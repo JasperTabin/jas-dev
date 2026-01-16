@@ -9,11 +9,11 @@ const techStack = {
 
 export const TechStack = () => {
   return (
-    <section id="techstack" className="space-y-3">
+    <section id="techstack" className="space-y-4">
       {/* Header */}
       <div className="flex items-center gap-2">
         <Code className="w-5 h-5 text-[var(--text-primary)]" />
-        <h2 className="text-xl font-bold text-[var(--text-primary)]">
+        <h2 className="text-xl font-thin text-[var(--text-primary)]">
           Tech Stack
         </h2>
       </div>

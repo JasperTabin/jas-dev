@@ -7,7 +7,7 @@ export const About = () => {
       {/* Header */}
       <header className="flex items-center gap-2 mb-4">
         <User className="w-5 h-5 text-[var(--text-primary)]" />
-        <h1 className="text-xl font-bold text-[var(--text-primary)]">
+        <h1 className="text-xl font-thin text-[var(--text-primary)]">
           Beyond Coding
         </h1>
       </header>

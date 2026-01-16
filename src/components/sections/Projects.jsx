@@ -1,19 +1,21 @@
-/* Project Section showcasing only 2 projects. */
-
 import { defaultProjects } from "../../Data/ProjectData";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import { Folder } from "lucide-react"; 
 
-export default function Projects({ projects = defaultProjects }) {
+export const Projects = ({ projects = defaultProjects }) => {
   return (
     <section id="projects">
       <div className="max-w-5xl mx-auto">
+        {/* Header */}
         <div className="flex items-center justify-between pb-4">
           <h2 
-            className="text-xl font-bold text-[var(--text-primary)]"
+            className="flex items-center gap-2 text-xl font-thin text-[var(--text-primary)]"
             style={{ color: 'var(--text-primary)' }}
           >
+            <Folder className="h-5 w-5" />
             Pinned Projects
           </h2>
+
           <a
             href="/projects"
             className="text-sm font-semibold hover:underline transition-colors"
@@ -23,6 +25,7 @@ export default function Projects({ projects = defaultProjects }) {
           </a>
         </div>
 
+        {/* Project grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projects.slice(0, 2).map((p) => (
             <article
@@ -83,4 +86,4 @@ export default function Projects({ projects = defaultProjects }) {
       </div>
     </section>
   );
-}
+};

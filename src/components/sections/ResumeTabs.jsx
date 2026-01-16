@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { resumeData } from "../../Data/resumeData";
+import { Briefcase } from "lucide-react";
 
 const TABS = ["Work", "Education"];
 
@@ -7,7 +8,7 @@ const Avatar = ({ logo, title }) => {
   const initials = title
     .split(" ")
     .slice(0, 2)
-    .map(word => word[0])
+    .map((word) => word[0])
     .join("")
     .toUpperCase();
 
@@ -32,13 +33,14 @@ export const ResumeTabs = () => {
   return (
     <section id="resume">
       {/* Heading */}
-      <h2 className="text-xl font-bold text-[var(--text-primary)] mb-4">
+      <h2 className="mb-4 flex items-center gap-2 text-xl font-thin text-[var(--text-primary)]">
+        <Briefcase className="h-5 w-5" />
         My Career
       </h2>
 
       {/* Tabs */}
       <div className="mb-2 grid h-9 w-full grid-cols-2 rounded-lg bg-[var(--border)] p-1">
-        {TABS.map(tab => {
+        {TABS.map((tab) => {
           const isActive = activeTab === tab;
 
           return (
