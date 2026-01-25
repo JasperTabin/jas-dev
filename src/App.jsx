@@ -1,72 +1,24 @@
-import { useEffect, useRef } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useLocation,
-} from "react-router-dom";
-import gsap from "gsap";
+// Router & Layout
 
-import { Home } from "./components/sections/Home";
-import { Navbar } from "./components/Navbar";
-import { ResumeTabs } from "./components/sections/ResumeTabs";
-import { TechStack } from "./components/sections/TechStack";
-import { About } from "./components/sections/About";
-import { Projects } from "./components/sections/Projects";
-import Footer from "./components/Footer";
-import Type from "./components/sections/Type";
-import { All_Projects } from "./components/sections/All_Projects";
+import { useTheme } from "./components/useTheme";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HomePage } from "./components/pages/Homepage";
+import { ProjectsPage } from "./components/pages/ProjectsPage";
 
 function AppContent() {
-  const mainRef = useRef(null);
-  const location = useLocation();
-
-  useEffect(() => {
-    if (!mainRef.current) return;
-
-    gsap.fromTo(
-      mainRef.current,
-      { clipPath: "inset(0 0 100% 0)" },
-      { clipPath: "inset(0 0 0% 0)", duration: 1, ease: "power2.out" }
-    );
-  }, [location]);
-
   return (
-    <main
-      ref={mainRef}
-      className="relative mx-auto max-w-xl px-6 overflow-hidden"
-    >
-      <Navbar />
+    <main className="max-w-4xl mx-auto px-4 py-8">
       <Routes>
-        <Route
-          path="/"
-          element={
-            <div className="space-y-10">
-              <Home />
-              <TechStack />
-              <ResumeTabs />
-              <About />
-              <Projects />
-              <Type />
-              <Footer />
-            </div>
-          }
-        />
-        <Route
-          path="/projects"
-          element={
-            <div className="space-y-10">
-              <All_Projects />
-              <Footer />
-            </div>
-          }
-        />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/projects" element={<ProjectsPage />} />
       </Routes>
     </main>
   );
 }
 
 export default function App() {
+  useTheme();
+
   return (
     <Router>
       <AppContent />

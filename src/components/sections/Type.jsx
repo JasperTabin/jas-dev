@@ -70,10 +70,7 @@ export default function TypingTest() {
 
   return (
     <section id="Type">
-      <div 
-        className="border p-4 rounded-lg bg-transparent relative"
-        style={{ borderColor: 'var(--border)' }}
-      >
+
         <p className="mb-3 text-base select-none">
           {done ? (
             <span 
@@ -146,7 +143,6 @@ export default function TypingTest() {
             <span className="font-mono">{time}</span>
           </div>
         )}
-      </div>
     </section>
   );
 }

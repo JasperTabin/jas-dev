@@ -4,33 +4,49 @@ export const defaultProjects = [
   {
     id: 1,
     title: "IoT Water Monitoring System",
-    description: "A capstone project that monitors water quality and usage using IoT technology. Built with Arduino, Firebase, and MIT app inventor",
+    description:
+      "Capstone Project",
     image: "/Capstone.jpg",
+
     links: [
-      { label: "Visit", url: "https://www.youtube.com/watch?v=FpUaKoGismA&ab_channel=JohnGabrielGerolia", type: "primary" },
+      {
+        label: "Visit",
+        url: "https://www.youtube.com/watch?v=FpUaKoGismA&ab_channel=JohnGabrielGerolia",
+        displayName: "Click to Watch",
+        type: "primary",
+      },
     ],
   },
 
   {
     id: 2,
     title: "Urban Web",
-    description: "A website we made on our 3rd year for our project in Web Development class using HTML, CSS, JavaScript.",
+    description:
+      "A 3rd Yr Porject",
     image: "/Website.jpg",
     links: [
-      { label: "Source", url: "https://github.com/JasperTabin/LaboLinaw-Urban-Web", type: "secondary" },
-      { label: "Visit", url: "https://jaspertabin.github.io/LaboLinaw-Urban-Web/", type: "primary" },
+      {
+        label: "Visit",
+        url: "https://jaspertabin.github.io/LaboLinaw-Urban-Web/",
+        displayName: "Demo Website",
+        type: "primary",
+      },
     ],
   },
 
   {
     id: 3,
     title: "Cat Maze Game",
-    description: "A fun and interactive maze game built with React where you guide a cat to the finish line built with React, CSS and JavaScript",
+    description:
+      "Cat Game",
     image: "/Desktop2.png",
     links: [
-      { label: "Source", url: "https://github.com/JasperTabin/my-react-game/tree/main", type: "secondary" },
-      { label: "Visit", url: "https://jaspertabin.github.io/my-react-game/", type: "primary" },
+      {
+        label: "Visit",
+        url: "https://jaspertabin.github.io/my-react-game/",
+        displayName: "Demo Website",
+        type: "primary",
+      },
     ],
   },
-
 ];
