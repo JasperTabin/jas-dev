@@ -118,7 +118,7 @@ export default function TypingTest() {
           <img
             src={done || typing ? bongoAnim : bongoStatic}
             alt="Bongo Cat"
-            className="absolute -top-15 right-3 w-16"
+            className="absolute -top-15 right-1 w-16"
             draggable={false}
           />
         </div>
