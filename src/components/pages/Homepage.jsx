@@ -1,17 +1,32 @@
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
 import { Home } from "../sections/Home";
 import { TechStack } from "../sections/TechStack";
 import { Experience } from "../sections/Experience";
 import { BeyondCoding } from "../sections/BeyondCoding";
 import { About } from "../sections/About";
 import { Projects } from "../sections/Projects";
+import { Gallery } from '../sections/Gallery';
 import Type from "../sections/Type";
 
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
+// layout 
+const GridRow = ({ children }) => (
+  <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
+    {children}
+  </div>
+);
+
+// Styling
+const SectionCard = ({ children, className }) => (
+  <section className={`p-4 rounded-lg shadow-md border border-[var(--border)] overflow-hidden ${className}`}>
+    {children}
+  </section>
+);
+
 
 export function HomePage() {
+  // GSAP Animation
   const containerRef = useRef(null);
-  const sectionCard = "p-6 rounded-lg shadow-md border border-[var(--border)]";
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -29,36 +44,31 @@ export function HomePage() {
 
   return (
     <div ref={containerRef} className="flex flex-col gap-4">
+      {/* Sections */}
       <Home />
 
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
-        <section className={`lg:col-span-2 ${sectionCard}`}>
-          <About />
-        </section>
-        <section className={`lg:col-span-3 ${sectionCard}`}>
-          <Experience />
-        </section>
-      </div>
+      <GridRow>
+        <SectionCard className="lg:col-span-2"><About /></SectionCard>
+        <SectionCard className="lg:col-span-3"><Experience /></SectionCard>
+      </GridRow>
 
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
-        <section className={`lg:col-span-3 ${sectionCard}`}>
-          <TechStack />
-        </section>
-        <section className={`lg:col-span-2 ${sectionCard}`}>
-          <BeyondCoding />
-        </section>
-      </div>
+      <GridRow>
+        <SectionCard className="lg:col-span-3"><TechStack /></SectionCard>
+        <SectionCard className="lg:col-span-2"><BeyondCoding /></SectionCard>
+      </GridRow>
 
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
-        <section className={`lg:col-span-2 ${sectionCard}`}>
-          <Type />
-        </section>
-        <section className={`lg:col-span-3 ${sectionCard}`}>
-          <Projects />
-        </section>
-      </div>
+      <GridRow>
+        <SectionCard className="lg:col-span-2"><Type /></SectionCard>
+        <SectionCard className="lg:col-span-3"><Projects /></SectionCard>
+      </GridRow>
 
-      <footer className="w-full py-6 text-center text-xs font-mono border-t mt-4" style={{ color: "var(--text-secondary)", borderColor: "var(--border)" }}  >
+      <SectionCard><Gallery /></SectionCard>
+
+
+      <footer 
+        className="w-full py-6 text-center text-xs font-mono border-t mt-4" 
+        style={{ color: "var(--text-secondary)", borderColor: "var(--border)" }}
+      >
         © 2026 Jasper Tabin. All rights reserved.
       </footer>
     </div>

@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { AllProjects } from "../sections/AllProjects";
 
 export function ProjectsPage() {
+  // GSAP Animation
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -21,6 +22,7 @@ export function ProjectsPage() {
 
   return (
     <div ref={containerRef} className="space-y-10 ">
+       {/* Sections  */}
       <AllProjects />
 
       <footer

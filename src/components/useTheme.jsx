@@ -1,4 +1,4 @@
-// Dark & Light mode Logic
+// Logic
 import { useState, useEffect } from "react";
 
 export const useTheme = () => {
