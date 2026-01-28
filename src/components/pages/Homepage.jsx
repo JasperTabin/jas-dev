@@ -19,7 +19,7 @@ const GridRow = ({ children }) => (
 
 // Styling
 const SectionCard = ({ children, className }) => (
-  <section className={`p-4 rounded-lg shadow-md border border-[var(--border)] overflow-hidden ${className}`}>
+  <section className={`p-4 rounded-lg shadow-md border border-[var(--border)] overflow-hidden transition-transform duration-200 hover:-translate-y-0.5 ${className}`}>
     {children}
   </section>
 );
@@ -44,7 +44,7 @@ export function HomePage() {
   }, []);
 
   return (
-    <div ref={containerRef} className="flex flex-col gap-4">
+    <div ref={containerRef} className="flex flex-col gap-4 ">
       {/* Sections */}
       <Home />
 
@@ -53,14 +53,18 @@ export function HomePage() {
         <SectionCard className="lg:col-span-3"><Experience /></SectionCard>
       </GridRow>
       
-      <SectionCard> <Type /> </SectionCard>
-
+      <GridRow>
+        <SectionCard className="lg:col-span-5"><Type /></SectionCard>
+      </GridRow>
+      
       <GridRow>
         <SectionCard className="lg:col-span-3"><TechStack /></SectionCard>
         <SectionCard className="lg:col-span-2"><BeyondCoding /></SectionCard>
       </GridRow>
 
-      <SectionCard> <Projects /> </SectionCard>
+      <GridRow>
+        <SectionCard className="lg:col-span-5"><Projects /></SectionCard>
+      </GridRow>
 
       <GridRow>
             <SectionCard className="lg:col-span-2"><Socials /></SectionCard>

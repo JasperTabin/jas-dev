@@ -6,19 +6,28 @@ export const Gallery = () => {
   const [index, setIndex] = useState(0);
   const itemRefs = useRef([]);
 
-  const NavButton = ({ direction, onClick, disabled }) => (
-    <button
-      onClick={onClick}
-      disabled={disabled}
-      className={`absolute ${direction}-0 top-1/2 -translate-y-1/2 p-2 rounded-full border border-[var(--border)] transition-transform ${
-        disabled
-          ? "bg-white/20 text-gray-400"
-          : "bg-black/60 text-white hover:scale-110"
-      }`}
-    >
-      {direction === "left" ? <ChevronLeft /> : <ChevronRight />}
-    </button>
-  );
+  // Fixed NavButton
+  const NavButton = ({ direction, onClick, disabled }) => {
+    const positionClass = direction === "left" ? "-left-3" : "-right-3";
+
+    return (
+      <button
+        onClick={onClick}
+        disabled={disabled}
+        className={`absolute ${positionClass} top-1/2 -translate-y-1/2 p-2 rounded-full border border-[var(--border)] transition-transform z-10 shadow-lg ${
+          disabled
+            ? "bg-white/20 text-gray-400 cursor-not-allowed"
+            : "bg-black/80 text-white hover:scale-110"
+        }`}
+      >
+        {direction === "left" ? (
+          <ChevronLeft className="w-6 h-6" />
+        ) : (
+          <ChevronRight className="w-6 h-6" />
+        )}
+      </button>
+    );
+  };
 
   const getVisibleCount = () => {
     if (typeof window === "undefined") return 1;
@@ -45,25 +54,28 @@ export const Gallery = () => {
         <Images className="w-5 h-5" /> Gallery
       </h2>
 
-      <div className="relative overflow-hidden">
-        <div className="flex overflow-x-hidden gap-4">
-          {galleryImages.map((img, i) => (
-            <div
-              key={img.id}
-              ref={(el) => (itemRefs.current[i] = el)}
-              className="w-[calc(100%-1rem)] sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.667rem)] flex-shrink-0"
-            >
-              <div className="aspect-square rounded-lg border-2 border-[var(--border)] overflow-hidden">
-                <img
-                  src={img.src}
-                  alt={img.alt}
-                  className="w-full h-full object-cover"
-                />
+      <div className="relative">
+        <div className="overflow-hidden">
+          <div className="flex overflow-x-hidden gap-4">
+            {galleryImages.map((img, i) => (
+              <div
+                key={img.id}
+                ref={(el) => (itemRefs.current[i] = el)}
+                className="w-[calc(100%-1rem)] sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.667rem)] flex-shrink-0"
+              >
+                <div className="aspect-square rounded-lg border-2 border-[var(--border)] overflow-hidden">
+                  <img
+                    src={img.src}
+                    alt={img.alt}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
+        {/* Navigation buttons */}
         <NavButton
           direction="left"
           onClick={() => scrollTo(index - 1)}

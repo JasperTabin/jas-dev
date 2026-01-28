@@ -37,7 +37,7 @@ export const Socials = () => {
               href={item.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 border border-[var(--border-color)] rounded-md px-4 py-2 text-[var(--text-primary)]"
+              className="flex items-center gap-3 border border-[var(--border)] rounded-md px-4 py-2 text-[var(--text-primary)] transition-transform duration-200 hover:-translate-y-0.5"
             >
               <Icon className="w-5 h-5" />
               <span className="text-sm">{item.name}</span>
