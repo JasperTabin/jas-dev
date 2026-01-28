@@ -1,79 +1,62 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { ChevronLeft, ChevronRight, Images } from "lucide-react";
+import { galleryImages } from "../../Data/GalleryData";
 
-const images = [
-  { id: 1, src: "/Gallery/G1.jpg", alt: "Photo 1" },
-  { id: 2, src: "/Gallery/G2.jpg", alt: "Photo 2" },
-  { id: 3, src: "/Gallery/G3.jpg", alt: "Photo 3" },
-  { id: 4, src: "/Gallery/G4.jpg", alt: "Photo 4" },
-  { id: 5, src: "/Gallery/G5.jpg", alt: "Photo 5" },
-  { id: 6, src: "/Gallery/G6.jpg", alt: "Photo 6" },
-  { id: 7, src: "/Gallery/G7.jpg", alt: "Photo 7" },
-  { id: 8, src: "/Gallery/G8.jpg", alt: "Photo 8" },
-  { id: 9, src: "/Gallery/G9.jpg", alt: "Photo 9" },
-];
 export const Gallery = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const viewportRef = useRef(null);
-  const [itemWidth, setItemWidth] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(1);
+  const [index, setIndex] = useState(0);
+  const itemRefs = useRef([]);
 
-  useEffect(() => {
-    const updateWidth = () => {
-      if (viewportRef.current) {
-        const firstItem = viewportRef.current.querySelector(".gallery-item");
-        if (firstItem) {
-          const containerWidth = viewportRef.current.offsetWidth;
-          const itemWidth = firstItem.getBoundingClientRect().width; 
-          setItemWidth(itemWidth);
-          setItemsPerPage(Math.floor(containerWidth / itemWidth));
-        }
-      }
-    };
-    updateWidth();
-    window.addEventListener("resize", updateWidth);
-    return () => window.removeEventListener("resize", updateWidth);
-  }, []);
+  const NavButton = ({ direction, onClick, disabled }) => (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      className={`absolute ${direction}-0 top-1/2 -translate-y-1/2 p-2 rounded-full border border-[var(--border)] transition-transform ${
+        disabled
+          ? "bg-white/20 text-gray-400"
+          : "bg-black/60 text-white hover:scale-110"
+      }`}
+    >
+      {direction === "left" ? <ChevronLeft /> : <ChevronRight />}
+    </button>
+  );
 
-  const scrollToIndex = (index) => {
-    if (!viewportRef.current || itemWidth === 0) return;
-    viewportRef.current.style.transform = `translateX(-${index * itemWidth}px)`;
-    setCurrentIndex(index);
+  const getVisibleCount = () => {
+    if (typeof window === "undefined") return 1;
+    if (window.innerWidth >= 1024) return 3;
+    if (window.innerWidth >= 640) return 2;
+    return 1;
   };
 
-  const scrollNext = () => {
-    const maxIndex = images.length - itemsPerPage; 
-    if (currentIndex < maxIndex) {
-      scrollToIndex(currentIndex + 1);
-    }
-  };
+  const visibleCount = getVisibleCount();
+  const maxIndex = galleryImages.length - visibleCount;
 
-  const scrollPrev = () => {
-    if (currentIndex > 0) {
-      scrollToIndex(currentIndex - 1);
-    }
+  const scrollTo = (newIndex) => {
+    itemRefs.current[newIndex]?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "start",
+    });
+    setIndex(newIndex);
   };
 
   return (
     <section>
       <h2 className="text-xl font-thin mb-4 flex items-center gap-2 text-[var(--text-primary)]">
-        <Images className="w-5 h-5 text-[var(--text-primary)]" /> Gallery
+        <Images className="w-5 h-5" /> Gallery
       </h2>
 
       <div className="relative overflow-hidden">
-        <div
-          ref={viewportRef}
-          className="flex transition-transform duration-500 ease-in-out"
-        >
-          {images.map((image) => (
+        <div className="flex overflow-x-hidden gap-4">
+          {galleryImages.map((img, i) => (
             <div
-              key={image.id}
-              className="gallery-item flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 p-2 box-border"
+              key={img.id}
+              ref={(el) => (itemRefs.current[i] = el)}
+              className="w-[calc(100%-1rem)] sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.667rem)] flex-shrink-0"
             >
               <div className="aspect-square rounded-lg border-2 border-[var(--border)] overflow-hidden">
                 <img
-                  src={image.src}
-                  alt={image.alt}
+                  src={img.src}
+                  alt={img.alt}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -81,31 +64,16 @@ export const Gallery = () => {
           ))}
         </div>
 
-        {/* Left Arrow */}
-        <button
-          onClick={scrollPrev}
-          disabled={currentIndex === 0}
-          className={`absolute left-0 top-1/2 -translate-y-1/2 p-2 rounded-full border border-[var(--border)] ${
-            currentIndex === 0
-              ? "bg-white/20 text-gray-400"
-              : "bg-black/60 text-white hover:scale-110"
-          }`}
-        >
-          <ChevronLeft />
-        </button>
-
-        {/* Right Arrow */}
-        <button
-          onClick={scrollNext}
-          disabled={currentIndex >= images.length - itemsPerPage}
-          className={`absolute right-0 top-1/2 -translate-y-1/2 p-2 rounded-full border border-[var(--border)] ${
-            currentIndex >= images.length - itemsPerPage
-              ? "bg-white/20 text-gray-400"
-              : "bg-black/60 text-white hover:scale-110"
-          }`}
-        >
-          <ChevronRight />
-        </button>
+        <NavButton
+          direction="left"
+          onClick={() => scrollTo(index - 1)}
+          disabled={index === 0}
+        />
+        <NavButton
+          direction="right"
+          onClick={() => scrollTo(index + 1)}
+          disabled={index >= maxIndex}
+        />
       </div>
     </section>
   );

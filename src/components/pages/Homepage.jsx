@@ -7,6 +7,7 @@ import { BeyondCoding } from "../sections/BeyondCoding";
 import { About } from "../sections/About";
 import { Projects } from "../sections/Projects";
 import { Gallery } from '../sections/Gallery';
+import { Socials } from "../sections/Socials";
 import Type from "../sections/Type";
 
 // layout 
@@ -51,18 +52,21 @@ export function HomePage() {
         <SectionCard className="lg:col-span-2"><About /></SectionCard>
         <SectionCard className="lg:col-span-3"><Experience /></SectionCard>
       </GridRow>
+      
+      <SectionCard> <Type /> </SectionCard>
 
       <GridRow>
         <SectionCard className="lg:col-span-3"><TechStack /></SectionCard>
         <SectionCard className="lg:col-span-2"><BeyondCoding /></SectionCard>
       </GridRow>
 
+      <SectionCard> <Projects /> </SectionCard>
+
       <GridRow>
-        <SectionCard className="lg:col-span-2"><Type /></SectionCard>
-        <SectionCard className="lg:col-span-3"><Projects /></SectionCard>
+            <SectionCard className="lg:col-span-2"><Socials /></SectionCard>
+            <SectionCard className="lg:col-span-3"><Gallery /></SectionCard>
       </GridRow>
 
-      <SectionCard><Gallery /></SectionCard>
 
 
       <footer 

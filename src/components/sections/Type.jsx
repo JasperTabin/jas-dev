@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { Keyboard } from "lucide-react";
 
 export default function TypingTest() {
   const bongoStatic = "/Cat.png";
@@ -18,7 +19,7 @@ export default function TypingTest() {
     if (!start || done) return;
     const id = setInterval(
       () => setTime(((Date.now() - start) / 1000).toFixed(3)),
-      10
+      10,
     );
     return () => clearInterval(id);
   }, [start, done]);
@@ -70,79 +71,79 @@ export default function TypingTest() {
 
   return (
     <section id="Type">
-
-        <p className="mb-3 text-base select-none">
-          {done ? (
-            <span 
-              className="font-semibold"
-              style={{ color: 'var(--text-primary)' }}
-            >
-              Nice! Your time is {time} seconds
-            </span>
-          ) : (
-            originalText.split("").map((ch, i) => {
-              let color = 'var(--text-secondary)';
-              if (i < input.length) {
-                color = input[i] === ch ? 'var(--text-primary)' : '#ef4444';
-              }
-              return (
-                <span 
-                  key={i} 
-                  style={{ color }}
-                >
-                  {ch}
-                </span>
-              );
-            })
-          )}
-        </p>
-
-        <div className="relative">
-          <textarea
-            ref={boxRef}
-            className="w-full bg-transparent border rounded-md p-3 resize-none outline-none"
-            style={{ 
-              borderColor: 'var(--border)',
-              color: 'var(--text-primary)'
-            }}
-            rows={2}
-            placeholder="Start typing here..."
-            value={done ? "Bongo Cat is celebrating" : input}
-            onChange={handleInput}
-            onKeyDown={handleKey}
-            onFocus={() => setFocused(true)}
-            onBlur={() => setFocused(false)}
-            disabled={false}
-          />
-
-          <img
-            src={done || typing ? bongoAnim : bongoStatic}
-            alt="Bongo Cat"
-            className="absolute -top-15 right-1 w-16"
-            draggable={false}
-          />
-        </div>
-
-        {!done && focused && (
-          <div 
-            className="flex justify-between mt-3 text-sm"
-            style={{ color: 'var(--text-secondary)' }}
+      <h2 className="text-xl font-thin mb-4 flex items-center gap-2 text-[var(--text-primary)]">
+        <Keyboard className="w-5 h-5 text-[var(--text-primary)]" />
+        Speed Type
+      </h2>
+      <p className="mb-3 text-base select-none">
+        {done ? (
+          <span
+            className="font-semibold"
+            style={{ color: "var(--text-primary)" }}
           >
-            <span>
-              <kbd 
-                className="px-1 py-0.5 border rounded"
-                style={{ 
-                  borderColor: 'var(--border)',
-                  backgroundColor: 'var(--secondary)'
-                }}
-              >
-                TAB
-              </kbd>{" "}
-              - restart
-            </span>
-            <span className="font-mono">{time}</span>
-          </div>
+            Nice! Your time is {time} seconds
+          </span>
+        ) : (
+          originalText.split("").map((ch, i) => {
+            let color = "var(--text-secondary)";
+            if (i < input.length) {
+              color = input[i] === ch ? "var(--text-primary)" : "#ef4444";
+            }
+            return (
+              <span key={i} style={{ color }}>
+                {ch}
+              </span>
+            );
+          })
         )}
+      </p>
+
+      <div className="relative">
+        <textarea
+          ref={boxRef}
+          className="w-full bg-transparent border rounded-md p-3 resize-none outline-none"
+          style={{
+            borderColor: "var(--border)",
+            color: "var(--text-primary)",
+          }}
+          rows={2}
+          placeholder="Start typing here..."
+          value={done ? "Bongo Cat is celebrating" : input}
+          onChange={handleInput}
+          onKeyDown={handleKey}
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
+          disabled={false}
+        />
+
+        <img
+          src={done || typing ? bongoAnim : bongoStatic}
+          alt="Bongo Cat"
+          className="absolute -top-15 right-1 w-16"
+          draggable={false}
+        />
+      </div>
+
+      {!done && focused && (
+        <div
+          className="flex justify-between mt-3 text-sm"
+          style={{ color: "var(--text-secondary)" }}
+        >
+          <span>
+            <kbd
+              className="px-1 py-0.5 border rounded"
+              style={{
+                borderColor: "var(--border)",
+                backgroundColor: "var(--secondary)",
+              }}
+            >
+              TAB
+            </kbd>{" "}
+            - restart
+          </span>
+          <span className="font-mono">{time}</span>
+        </div>
+      )}
     </section>
   );
 }
