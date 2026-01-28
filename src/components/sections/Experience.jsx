@@ -1,27 +1,28 @@
 import { resumeData } from "../../Data/resumeData";
 import { Briefcase } from "lucide-react";
 
-const TimelineItem = ({ item, isLatest }) => {
+const TimelineItem = ({ item, isFirst, isLast }) => {
   return (
-    <div className="grid grid-cols-[20px_1fr_auto] gap-4 items-start">
-      <div className="flex justify-center items-start pt-2">
-        <div
-          className={`w-3 h-3 rounded-full border-2 ${
-            isLatest
-              ? "bg-[var(--text-primary)] border-[var(--text-primary)]"
-              : "bg-[var(--background)] border-[var(--text-primary)]"
-          }`}
-        />
+    <div className="flex gap-4">
+      <div className="flex flex-col items-center w-5">
+        {!isFirst && (
+          <div className="w-0.5 h-2 bg-[var(--border)]" />
+        )}
+        {isFirst && <div className="h-2" />}
+        <div className="w-2 h-2 rounded-full bg-[var(--border)] shrink-0" />
+        {!isLast && (
+          <div className="w-0.5 flex-1 bg-[var(--border)]" />
+        )}
       </div>
 
-      <div className="space-y-1">
+      <div className="flex-1 pb-4"> 
         <h3 className="font-semibold text-[var(--text-primary)]">
           {item.title}
         </h3>
         <p className="text-sm text-[var(--text-primary)]">{item.place}</p>
       </div>
 
-      <div className="text-xs text-[var(--text-secondary)] whitespace-nowrap pt-1">
+      <div className="text-xs text-[var(--text-secondary)] whitespace-nowrap">
         {item.date}
       </div>
     </div>
@@ -40,9 +41,14 @@ export const Experience = () => {
         Experience
       </h2>
 
-      <div className="space-y-6">
+      <div>
         {combinedExperience.map((item, index) => (
-          <TimelineItem key={index} item={item} isLatest={index === 0} />
+          <TimelineItem
+            key={index}
+            item={item}
+            isFirst={index === 0}
+            isLast={index === combinedExperience.length - 1}
+          />
         ))}
       </div>
     </section>

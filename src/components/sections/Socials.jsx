@@ -24,8 +24,13 @@ export const Socials = () => {
     <section>
       <h2 className="text-xl font-thin mb-4 flex items-center gap-2 text-[var(--text-primary)]">
         <Link className="w-5 h-5" />
-        Connect With Me
+        Socials
       </h2>
+
+      <p className="mb-4 text-[var(--text-secondary)]">
+          Want to say hello? Let's connect.
+        {" "}
+      </p>
 
       <div className="flex flex-col gap-2">
         {SOCIAL_LINKS.map((item) => {
@@ -45,6 +50,11 @@ export const Socials = () => {
           );
         })}
       </div>
+
+       <p className="mt-4 text-[var(--text-secondary)]">
+        I read every message personally and respond when I can. Looking forward
+        to connecting!{" "}
+      </p>
     </section>
   );
 };

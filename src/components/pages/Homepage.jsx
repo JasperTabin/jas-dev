@@ -59,7 +59,8 @@ export function HomePage() {
       
       <GridRow>
         <SectionCard className="lg:col-span-3"><TechStack /></SectionCard>
-        <SectionCard className="lg:col-span-2"><BeyondCoding /></SectionCard>
+        <SectionCard className="lg:col-span-2"><Socials /></SectionCard>
+
       </GridRow>
 
       <GridRow>
@@ -67,8 +68,8 @@ export function HomePage() {
       </GridRow>
 
       <GridRow>
-            <SectionCard className="lg:col-span-2"><Socials /></SectionCard>
-            <SectionCard className="lg:col-span-3"><Gallery /></SectionCard>
+        <SectionCard className="lg:col-span-2"><BeyondCoding /></SectionCard>
+        <SectionCard className="lg:col-span-3"><Gallery /></SectionCard>
       </GridRow>
 
 
