@@ -63,18 +63,18 @@ export default function Chatbot() {
     // 🔹 1. Predefined replies (fast + free)
     for (const { keywords, reply } of predefinedReplies) {
       if (keywords.some((kw) => lowerInput.includes(kw))) {
-        setMessages((prev) => [
-          ...prev,
-          { role: "assistant", content: reply },
-        ]);
+        setMessages((prev) => [...prev, { role: "assistant", content: reply }]);
         setIsLoading(false);
         return;
       }
     }
 
-    // 🔹 2. Gemini fallback (serverless, secure)
+    // 🔹 2. Node.js backend (Gemini)
     try {
-      const res = await fetch("/api/chat", {
+      const backendUrl =
+        import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+
+      const res = await fetch(`${backendUrl}/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: input }),

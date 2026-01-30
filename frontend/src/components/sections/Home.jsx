@@ -21,7 +21,7 @@ export const Home = () => {
     <section id="profile" className="flex flex-col gap-6">
       <div className="flex items-center gap-6">
         <img
-          src="../../../public/Profile2.png"
+          src="/Profile2.png"
           alt="Jasper Tabin"
           loading="lazy"
           className="h-[135px] w-[135px] rounded-lg object-cover object-[center_20%]"
