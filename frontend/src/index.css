@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+:root {
+  /* Light theme variables */
+  --primary: #ffffff;
+  --secondary: #0a0a0a;
+  --border: #404040;
+  --text-primary: #000000;
+  --text-secondary: #666666;
+  --font-body: 'Signika Negative', sans-serif;
+}
+
+.dark {
+  /* Dark theme variables */
+  --primary: #0a0a0a;
+  --secondary: #ffffff;
+  --border: #404040;
+  --text-primary: #ffffff;
+  --text-secondary: #cccccc;
+}
+
+body {
+  background-color: var(--primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  scroll-behavior: smooth;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+@keyframes wave {
+  0%   { transform: rotate(0deg); }
+  25%  { transform: rotate(20deg); }
+  50%  { transform: rotate(-15deg); }
+  75%  { transform: rotate(15deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.hand-wave:hover {
+  animation: wave 1.5s ease-in-out infinite;
+  transform-origin: bottom right; 
+}
