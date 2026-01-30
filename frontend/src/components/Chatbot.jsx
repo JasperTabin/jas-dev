@@ -71,10 +71,11 @@ export default function Chatbot() {
 
     // 🔹 2. Node.js backend (Gemini)
     try {
-      const backendUrl =
-        import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+      const backendUrl = import.meta.env.VITE_BACKEND_URL
+        ? import.meta.env.VITE_BACKEND_URL
+        : "http://localhost:5000"; // local dev
 
-      const res = await fetch(`${backendUrl}/chat`, {
+      const res = await fetch(`${backendUrl}/api/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: input }),
