@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { MessageCircleMore, Send, X } from "lucide-react";
-import predefinedReplies from "../Data/predefinedReplies"; // static replies
+import predefinedReplies from "../Data/predefinedReplies";
 
 const baseStyle = "bg-[var(--primary)] border border-[var(--border)]";
 const textStyle = "text-[var(--text-primary)]";
@@ -62,7 +62,7 @@ export default function Chatbot() {
 
     // 🔹 Check predefined replies first
     const match = predefinedReplies.find(({ keywords }) =>
-      keywords.some((k) => lowerInput.includes(k)),
+      keywords.some((k) => lowerInput.includes(k))
     );
 
     if (match) {
@@ -88,7 +88,10 @@ export default function Chatbot() {
       ]);
     } catch (error) {
       console.error("Error:", error);
-      setMessages((m) => [...m, { role: "assistant", content: fallbackReply }]);
+      setMessages((m) => [
+        ...m,
+        { role: "assistant", content: fallbackReply },
+      ]);
     } finally {
       setIsLoading(false);
     }
@@ -99,21 +102,12 @@ export default function Chatbot() {
       <style>{`.chatbot-input::placeholder { color: var(--text-secondary); opacity: 0.7; }`}</style>
 
       {/* Floating Button */}
-      {/* Mobile: icon-only */}
       <button
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-6 right-6 rounded-full p-4 shadow-lg transition hover:scale-105 z-50 block md:hidden ${baseStyle}`}
+        className={`fixed bottom-6 right-6 rounded-full shadow-lg transition hover:scale-105 z-50 flex items-center gap-2 px-4 md:px-6 py-3 ${baseStyle}`}
       >
-        <MessageCircleMore className="w-6 h-6" />
-      </button>
-
-      {/* Desktop: icon + text */}
-      <button
-        onClick={() => setIsOpen(true)}
-        className={`fixed bottom-6 right-6 rounded-full px-6 py-3 shadow-lg transition hover:scale-105 z-50 hidden md:flex items-center gap-2 font-medium ${baseStyle}`}
-      >
-        <MessageCircleMore className="w-5 h-5" />
-        Chat with jas
+        <MessageCircleMore className="w-6 h-6 md:w-5 md:h-5" />
+        <span className="hidden md:inline font-medium">Chat with jas</span>
       </button>
 
       {/* Chat Window */}
@@ -141,7 +135,7 @@ export default function Chatbot() {
                 <h3 className={`font-semibold ${textStyle}`}>Chat with jas</h3>
                 <div className="flex items-center gap-1">
                   <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <span className="text-xs text-(--text-secondary)">
+                  <span className="text-xs text-[var(--text-secondary)]">
                     ONLINE
                   </span>
                 </div>
@@ -156,7 +150,7 @@ export default function Chatbot() {
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-(--primary)">
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-[var(--primary)]">
             {messages.map((m, i) => (
               <Bubble key={i} role={m.role}>
                 {m.content}
@@ -168,7 +162,7 @@ export default function Chatbot() {
                   {[0, 0.1, 0.2].map((d, i) => (
                     <div
                       key={i}
-                      className="w-2 h-2 rounded-full animate-bounce bg-(--text-secondary)"
+                      className="w-2 h-2 rounded-full animate-bounce bg-[var(--text-secondary)]"
                       style={{ animationDelay: `${d}s` }}
                     />
                   ))}
