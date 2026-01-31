@@ -60,9 +60,13 @@ export default function Chatbot() {
     setInput("");
     setIsLoading(true);
 
-    // 🔹 Check predefined replies first
+    // 🔹 Check predefined replies first (with WORD BOUNDARY matching)
     const match = predefinedReplies.find(({ keywords }) =>
-      keywords.some((k) => lowerInput.includes(k)),
+      keywords.some((k) => {
+        // Create regex with word boundaries to match whole words only
+        const regex = new RegExp(`\\b${k.toLowerCase()}\\b`, 'i');
+        return regex.test(lowerInput);
+      })
     );
 
     if (match) {
