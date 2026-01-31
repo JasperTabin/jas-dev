@@ -1,40 +1,21 @@
-// api/chat.js
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-export default async function (req, res) {
+export default async function handler(req, res) {
   if (req.method !== "POST") {
-    res.statusCode = 405;
-    return res.end("Method Not Allowed");
+    return res.status(405).json({ error: "Method Not Allowed" });
   }
 
   try {
-    let body = "";
+    const { message } = req.body;
 
-    req.on("data", chunk => {
-      body += chunk;
-    });
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-    req.on("end", async () => {
-      const { message } = JSON.parse(body || "{}");
+    const result = await model.generateContent(message);
+    const response = result.response.text();
 
-      if (!message) {
-        res.statusCode = 400;
-        return res.end("Message is required");
-      }
-
-      const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-
-      const result = await model.generateContent(message);
-      const reply = result.response.text();
-
-      res.setHeader("Content-Type", "application/json");
-      res.statusCode = 200;
-      res.end(JSON.stringify({ reply }));
-    });
+    res.status(200).json({ reply: response });
   } catch (err) {
-    console.error(err);
-    res.statusCode = 500;
-    res.end("Server error");
+    res.status(500).json({ error: "Gemini error" });
   }
 }

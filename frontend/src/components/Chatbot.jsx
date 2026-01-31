@@ -62,7 +62,7 @@ export default function Chatbot() {
 
     // 🔹 Check predefined replies first
     const match = predefinedReplies.find(({ keywords }) =>
-      keywords.some((k) => lowerInput.includes(k))
+      keywords.some((k) => lowerInput.includes(k)),
     );
 
     if (match) {
@@ -88,10 +88,7 @@ export default function Chatbot() {
       ]);
     } catch (error) {
       console.error("Error:", error);
-      setMessages((m) => [
-        ...m,
-        { role: "assistant", content: fallbackReply },
-      ]);
+      setMessages((m) => [...m, { role: "assistant", content: fallbackReply }]);
     } finally {
       setIsLoading(false);
     }
