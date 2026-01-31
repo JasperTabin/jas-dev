@@ -6,7 +6,7 @@ const baseStyle = "bg-[var(--primary)] border border-[var(--border)]";
 const textStyle = "text-[var(--text-primary)]";
 
 const fallbackReply =
-  "Hmm 🤔 I don’t have a predefined answer for that yet. Try asking about my skills, projects, or contact info!";
+  "Hmm 🤔 I don't have a predefined answer for that yet. Try asking about my skills, projects, or contact info!";
 
 const MAX_INPUT_LENGTH = 500;
 
@@ -71,9 +71,14 @@ export default function Chatbot() {
       return;
     }
 
-    // 🔹 Otherwise call backend (Gemini via /api/chat)
+    // 🔹 Use different API URL for development vs production
+    const apiUrl = import.meta.env.DEV 
+      ? 'http://localhost:3000/api/chat'  // Local dev server
+      : '/api/chat';                       // Vercel serverless function
+
+    // 🔹 Call backend (Gemini via /api/chat)
     try {
-      const response = await fetch("/api/chat", {
+      const response = await fetch(apiUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: userInput }),
