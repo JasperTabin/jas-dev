@@ -1,14 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
 import { MessageCircleMore, Send, X } from "lucide-react";
-import predefinedReplies from "../Data/predefinedReplies";
+import predefinedReplies from "../Data/predefinedReplies"; // static replies
 
 const baseStyle = "bg-[var(--primary)] border border-[var(--border)]";
 const textStyle = "text-[var(--text-primary)]";
 
-const defaultReply =
+const fallbackReply =
   "Hmm 🤔 I don’t have a predefined answer for that yet. Try asking about my skills, projects, or contact info!";
 
-const MAX_INPUT_LENGTH = 500; // UX guard (backend still enforces this)
+const MAX_INPUT_LENGTH = 500;
 
 const Bubble = ({ role, children }) => {
   const isUser = role === "user";
@@ -31,8 +31,8 @@ export default function Chatbot() {
     },
   ]);
   const [input, setInput] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
@@ -43,8 +43,8 @@ export default function Chatbot() {
     if (!input.trim()) return;
 
     if (input.length > MAX_INPUT_LENGTH) {
-      setMessages((prev) => [
-        ...prev,
+      setMessages((m) => [
+        ...m,
         {
           role: "assistant",
           content: "That message is a bit too long 😅 Try shortening it.",
@@ -53,54 +53,42 @@ export default function Chatbot() {
       return;
     }
 
-    const userMessage = { role: "user", content: input };
-    setMessages((prev) => [...prev, userMessage]);
+    const userInput = input;
+    const lowerInput = input.toLowerCase();
+
+    setMessages((m) => [...m, { role: "user", content: userInput }]);
     setInput("");
     setIsLoading(true);
 
-    const lowerInput = input.toLowerCase();
+    // 🔹 Check predefined replies first
+    const match = predefinedReplies.find(({ keywords }) =>
+      keywords.some((k) => lowerInput.includes(k)),
+    );
 
-    // 🔹 1. Predefined replies (fast + free)
-    for (const { keywords, reply } of predefinedReplies) {
-      if (keywords.some((kw) => lowerInput.includes(kw))) {
-        setMessages((prev) => [...prev, { role: "assistant", content: reply }]);
-        setIsLoading(false);
-        return;
-      }
+    if (match) {
+      setMessages((m) => [...m, { role: "assistant", content: match.reply }]);
+      setIsLoading(false);
+      return;
     }
 
-    // 🔹 2. Node.js backend (Gemini)
+    // 🔹 Otherwise call backend (Gemini via /api/chat)
     try {
-      const backendUrl = import.meta.env.VITE_BACKEND_URL
-        ? import.meta.env.VITE_BACKEND_URL
-        : "http://localhost:5000"; // local dev
-
-      const res = await fetch(`${backendUrl}/api/chat`, {
+      const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: input }),
+        body: JSON.stringify({ message: userInput }),
       });
 
-      const data = await res.json();
+      if (!response.ok) throw new Error("Backend not reachable");
 
-      if (!res.ok) {
-        throw new Error(data?.error || "Request failed");
-      }
-
-      setMessages((prev) => [
-        ...prev,
-        { role: "assistant", content: data.reply || defaultReply },
+      const data = await response.json();
+      setMessages((m) => [
+        ...m,
+        { role: "assistant", content: data.reply || fallbackReply },
       ]);
     } catch (error) {
-      console.error("Chat error:", error);
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: "assistant",
-          content:
-            "Oops 😬 Something went wrong on my end. Please try again in a bit.",
-        },
-      ]);
+      console.error("Error:", error);
+      setMessages((m) => [...m, { role: "assistant", content: fallbackReply }]);
     } finally {
       setIsLoading(false);
     }
@@ -111,6 +99,7 @@ export default function Chatbot() {
       <style>{`.chatbot-input::placeholder { color: var(--text-secondary); opacity: 0.7; }`}</style>
 
       {/* Floating Button */}
+      {/* Mobile: icon-only */}
       <button
         onClick={() => setIsOpen(true)}
         className={`fixed bottom-6 right-6 rounded-full p-4 shadow-lg transition hover:scale-105 z-50 block md:hidden ${baseStyle}`}
@@ -118,6 +107,7 @@ export default function Chatbot() {
         <MessageCircleMore className="w-6 h-6" />
       </button>
 
+      {/* Desktop: icon + text */}
       <button
         onClick={() => setIsOpen(true)}
         className={`fixed bottom-6 right-6 rounded-full px-6 py-3 shadow-lg transition hover:scale-105 z-50 hidden md:flex items-center gap-2 font-medium ${baseStyle}`}
@@ -132,7 +122,7 @@ export default function Chatbot() {
           className={`
             fixed z-40 flex flex-col overflow-hidden shadow-2xl ${baseStyle}
             md:bottom-24 md:right-6 md:w-96 md:h-[600px] md:rounded-3xl
-            bottom-25 right-4 w-[85%] h-[55vh] rounded-2xl
+            bottom-20 right-4 w-[85%] h-[55vh] rounded-2xl
           `}
         >
           {/* Header */}
@@ -151,7 +141,7 @@ export default function Chatbot() {
                 <h3 className={`font-semibold ${textStyle}`}>Chat with jas</h3>
                 <div className="flex items-center gap-1">
                   <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <span className="text-xs text-[var(--text-secondary)]">
+                  <span className="text-xs text-(--text-secondary)">
                     ONLINE
                   </span>
                 </div>
@@ -166,7 +156,7 @@ export default function Chatbot() {
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-[var(--primary)]">
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-(--primary)">
             {messages.map((m, i) => (
               <Bubble key={i} role={m.role}>
                 {m.content}
@@ -178,7 +168,7 @@ export default function Chatbot() {
                   {[0, 0.1, 0.2].map((d, i) => (
                     <div
                       key={i}
-                      className="w-2 h-2 rounded-full animate-bounce bg-[var(--text-secondary)]"
+                      className="w-2 h-2 rounded-full animate-bounce bg-(--text-secondary)"
                       style={{ animationDelay: `${d}s` }}
                     />
                   ))}
