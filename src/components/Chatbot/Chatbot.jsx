@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { MessageCircleMore, Send, X } from "lucide-react";
-import { Replies } from "../../data/repliesData";
+import { Replies } from "../../data/repliesData.js";
 
 export const Chatbot = () => {
   /* -------------------- UI STATE -------------------- */
