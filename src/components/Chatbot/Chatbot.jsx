@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { MessageCircleMore, Send, X } from "lucide-react";
-import { predefinedReplies } from "../../data/Replies.js";
+import { Replies } from "../../data/Replies.js";
 
 export const Chatbot = () => {
   /* -------------------- UI STATE -------------------- */
@@ -111,7 +111,7 @@ export const Chatbot = () => {
     setIsLoading(true);
 
     // Check predefined replies first
-    const match = predefinedReplies.find(({ keywords }) =>
+    const match = Replies.find(({ keywords }) =>
       keywords.some((k) => new RegExp(`\\b${k}\\b`, "i").test(lowerInput)),
     );
     if (match) {
