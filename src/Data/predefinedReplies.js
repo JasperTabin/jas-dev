@@ -1,4 +1,4 @@
-const predefinedReplies = [
+export const predefinedReplies = [
   {
     keywords: ["hello", "hi", "hey"],
     reply: "Hey there! 👋 How’s it going?",
