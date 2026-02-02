@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { MessageCircleMore, Send, X } from "lucide-react";
-import predefinedReplies from "../Data/predefinedReplies";
+import predefinedReplies from "../../Data/predefinedReplies";
 
-export const Chatbot = () => {
+export const Test = () => {
   /* -------------------- UI STATE -------------------- */
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
@@ -31,7 +31,8 @@ export const Chatbot = () => {
       }
     };
     if (isOpen) document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    return () =>
+      document.removeEventListener("mousedown", handleClickOutside);
   }, [isOpen]);
 
   /* -------------------- AUTO SCROLL TO LATEST MESSAGE -------------------- */
@@ -109,10 +110,8 @@ export const Chatbot = () => {
     setMessages((prev) => [...prev, { role: "user", content: userInput }]);
     setInput("");
     setIsLoading(true);
-
-    // Check predefined replies first
     const match = predefinedReplies.find(({ keywords }) =>
-      keywords.some((k) => new RegExp(`\\b${k}\\b`, "i").test(lowerInput)),
+      keywords.some((k) => new RegExp(`\\b${k}\\b`, "i").test(lowerInput))
     );
     if (match) {
       setTimeout(() => {
@@ -139,10 +138,9 @@ export const Chatbot = () => {
 
       const data = await res.json();
 
-      // ✅ Show either reply or error
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: data.reply || data.error },
+        { role: "assistant", content: data.reply },
       ]);
     } catch {
       setMessages((prev) => [
@@ -250,8 +248,8 @@ export const Chatbot = () => {
                   input.length >= MAX_INPUT_LENGTH
                     ? "text-orange-500 font-semibold"
                     : input.length >= MAX_INPUT_LENGTH - 50
-                      ? "text-yellow-500"
-                      : ""
+                    ? "text-yellow-500"
+                    : ""
                 }
               >
                 {input.length}/{MAX_INPUT_LENGTH}

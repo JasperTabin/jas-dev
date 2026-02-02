@@ -3,7 +3,8 @@ import { useTheme } from "./components/useTheme";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { HomePage } from "./components/pages/Homepage";
 import { ProjectsPage } from "./components/pages/ProjectsPage";
-import Chatbot from "./components/Chatbot"; // Add this import
+import { Chatbot } from "./components/Chatbot"; 
+// import { Test } from './components/sections/test';
 
 function AppContent() {
   return (
@@ -15,6 +16,7 @@ function AppContent() {
         </Routes>
       </main>
       <Chatbot />
+      {/* <Test /> */}
     </>
   );
 }

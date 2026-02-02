@@ -6,21 +6,32 @@
 // This file is NOT deployed to Vercel
 // ============================================
 
+//  Uses express-rate-limit
+
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import rateLimit from 'express-rate-limit';
 
-// Load environment variables from .env file
 dotenv.config();
 
 const app = express();
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
-// API endpoint - matches Vercel's /api/chat
+// -----------------------------
+// Rate limiting middleware
+// -----------------------------
+const limiter = rateLimit({
+  windowMs: 60 * 1000, 
+  max: 5,             
+  message: { error: "Too many requests, please slow down." },
+});
+
+app.use('/api/chat', limiter);
+
 app.post('/api/chat', async (req, res) => {
   try {
     const { message } = req.body;
@@ -29,11 +40,10 @@ app.post('/api/chat', async (req, res) => {
       return res.status(400).json({ error: "Message is required" });
     }
 
-    // Initialize Gemini AI
+    // eslint-disable-next-line no-undef
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
-    // Generate response
     const result = await model.generateContent(message);
     const reply = result.response.text();
 
@@ -47,7 +57,6 @@ app.post('/api/chat', async (req, res) => {
   }
 });
 
-// Start server
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`✅ Local API server running on http://localhost:${PORT}`);

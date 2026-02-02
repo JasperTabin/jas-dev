@@ -23,7 +23,7 @@ const predefinedReplies = [
   },
 
   {
-    keywords: ["contact?", "contact", "email", "linkedin", "reach you?", "reach you"],
+    keywords: ["contact?", "contact", "email", "linkedin", "reach you?", "reach you", "Socials", "socials"],
     reply: "You can reach me via the socials links on my portfolio website.",
   },
 

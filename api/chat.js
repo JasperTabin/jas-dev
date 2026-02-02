@@ -9,8 +9,9 @@
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
+let requestCounts = new Map();
+
 export default async function handler(req, res) {
-  // Enable CORS for all origins
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
@@ -19,17 +20,41 @@ export default async function handler(req, res) {
     'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
   );
 
-  // Handle preflight OPTIONS request
   if (req.method === 'OPTIONS') {
     res.status(200).end();
     return;
   }
 
-  // Only allow POST requests
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
+  // -----------------------------
+  // Rate limiting logic
+  // -----------------------------
+  const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+  const now = Date.now();
+  const windowMs = 60 * 1000; 
+  const maxRequests = 5;     
+
+  requestCounts.forEach((timestamps, key) => {
+    requestCounts.set(
+      key,
+      timestamps.filter(ts => now - ts < windowMs)
+    );
+  });
+
+  const timestamps = requestCounts.get(ip) || [];
+  if (timestamps.length >= maxRequests) {
+    return res.status(429).json({ error: "Too many requests, please slow down." });
+  }
+
+  timestamps.push(now);
+  requestCounts.set(ip, timestamps);
+
+  // -----------------------------
+  // Gemini API call
+  // -----------------------------
   try {
     const { message } = req.body;
     
@@ -37,11 +62,10 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "Message is required" });
     }
 
-    // Initialize Gemini AI with environment variable from Vercel
+    // eslint-disable-next-line no-undef
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
-    // Generate response
     const result = await model.generateContent(message);
     const reply = result.response.text();
 

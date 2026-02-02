@@ -73,8 +73,6 @@ export function HomePage() {
         <SectionCard className="lg:col-span-3"><Gallery /></SectionCard>
       </GridRow>
 
-
-
       <footer 
         className="w-full py-6 text-center text-xs font-mono border-t mt-4" 
         style={{ color: "var(--text-secondary)", borderColor: "var(--border)" }}
