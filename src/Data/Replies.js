@@ -57,5 +57,3 @@ export const Replies = [
       "Goodbye! Thanks for visiting my portfolio — wishing you a great day ahead 👋",
   },
 ];
-
-export default Replies;
