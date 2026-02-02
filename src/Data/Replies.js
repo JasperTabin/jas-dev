@@ -1,4 +1,4 @@
-export const predefinedReplies = [
+export const Replies = [
   {
     keywords: ["hello", "hi", "hey"],
     reply: "Hey there! 👋 How’s it going?",
@@ -58,4 +58,4 @@ export const predefinedReplies = [
   },
 ];
 
-export default predefinedReplies;
+export default Replies;
