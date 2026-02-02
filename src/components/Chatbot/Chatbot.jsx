@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { MessageCircleMore, Send, X } from "lucide-react";
-import predefinedReplies from "../../data/predefinedReplies.js";
+import { predefinedReplies } from "../../data/predefinedReplies.js";
 
 export const Chatbot = () => {
   /* -------------------- UI STATE -------------------- */
