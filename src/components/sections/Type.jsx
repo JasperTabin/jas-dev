@@ -135,7 +135,7 @@ export default function TypingTest() {
               className="px-1 py-0.5 border rounded"
               style={{
                 borderColor: "var(--border)",
-                backgroundColor: "var(--secondary)",
+                backgroundColor: "var(--primary)",
               }}
             >
               TAB

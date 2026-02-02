@@ -32,6 +32,7 @@ export default async function handler(req, res) {
   // -----------------------------
   // Rate limiting logic
   // -----------------------------
+  
   const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
   const now = Date.now();
   const windowMs = 60 * 1000; 

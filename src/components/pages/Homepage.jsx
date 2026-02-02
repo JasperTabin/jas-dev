@@ -20,7 +20,7 @@ const GridRow = ({ children }) => (
 
 // Styling
 const SectionCard = ({ children, className }) => (
-  <section className={`p-4 rounded-lg shadow-md border border-[var(--border)] overflow-hidden transition-transform duration-200 hover:-translate-y-0.5 ${className}`}>
+  <section className={`p-4 rounded-lg shadow-md border border-(--border) overflow-hidden transition-transform duration-200 hover:-translate-y-0.5 ${className}`}>
     {children}
   </section>
 );

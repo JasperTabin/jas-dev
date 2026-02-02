@@ -22,8 +22,9 @@ app.use(cors());
 app.use(express.json());
 
 // -----------------------------
-// Rate limiting middleware
+// Rate limiting Logic
 // -----------------------------
+
 const limiter = rateLimit({
   windowMs: 60 * 1000, 
   max: 5,             

@@ -8,6 +8,8 @@
   --text-primary: #000000;
   --text-secondary: #666666;
   --font-body: 'Signika Negative', sans-serif;
+  --tagline-bg: #0a0a0a;   
+  --tagline-text: #ffffff; 
 }
 
 .dark {
@@ -17,6 +19,8 @@
   --border: #404040;
   --text-primary: #ffffff;
   --text-secondary: #cccccc;
+  --tagline-bg: #ffffff;   
+  --tagline-text: #0a0a0a; 
 }
 
 body {
@@ -35,10 +39,15 @@ body {
   100% { transform: rotate(0deg); }
 }
 
+.hand-wave {
+  display: inline-block;
+  transform-origin: bottom right;
+}
+
 .hand-wave:hover {
   animation: wave 1.5s ease-in-out infinite;
-  transform-origin: bottom right; 
 }
+
 
 .chat-scroll::-webkit-scrollbar {
   width: 6px;

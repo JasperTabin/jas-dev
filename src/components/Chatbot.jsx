@@ -173,13 +173,7 @@ export const Chatbot = () => {
       {isOpen && (
         <div
           ref={chatRef}
-          className="
-            fixed bottom-20 right-4 md:right-6
-            w-[95%] md:w-96 h-[70vh]
-            flex flex-col
-            bg-(--primary) border border-(--border)
-            rounded-lg shadow-2xl z-50
-          "
+          className="flex flex-col fixed bottom-25 right-4 md:right-6 w-[95%] md:w-96 h-[70vh] bg-(--primary) border border-(--border) rounded-lg  z-50"
         >
           {/* Header */}
           <div className="px-4 py-3 flex items-center border-b border-(--border)">
