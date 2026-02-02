@@ -1,15 +1,16 @@
 import React from 'react';
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { Home } from "../sections/Home";
-import { TechStack } from "../sections/TechStack";
-import { Experience } from "../sections/Experience";
-import { BeyondCoding } from "../sections/BeyondCoding";
-import { About } from "../sections/About";
-import { Projects } from "../sections/Projects";
-import { Gallery } from '../sections/Gallery';
-import { Socials } from "../sections/Socials";
-import Type from "../sections/Type";
+
+import { Home } from "../Home/sections/Home";
+import { TechStack } from "../Home/sections/TechStack";
+import { Experience } from "../Home/sections/Experience";
+import { BeyondCoding } from "../Home/sections/BeyondCoding";
+import { About } from "../Home/sections/About";
+import { Projects } from "../Home/sections/Projects";
+import { Gallery } from '../Home/sections/Gallery';
+import { Socials } from "../Home/sections/Socials";
+import Type from "../Home/sections/Type";
 
 // layout 
 const GridRow = ({ children }) => (

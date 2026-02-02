@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useRef } from "react";
 import { ChevronLeft, ChevronRight, Images } from "lucide-react";
-import { galleryImages } from "../../Data/GalleryData";
+import { galleryImages } from "../../../data/GalleryData";
 
 export const Gallery = () => {
   const [index, setIndex] = useState(0);

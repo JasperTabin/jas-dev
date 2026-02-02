@@ -1,5 +1,5 @@
 import { FaExternalLinkAlt } from "react-icons/fa";
-import { defaultProjects } from "../../Data/ProjectData";
+import { defaultProjects } from "../../../data/ProjectData";
 import { Link } from "react-router-dom";
 import { memo } from "react";
 

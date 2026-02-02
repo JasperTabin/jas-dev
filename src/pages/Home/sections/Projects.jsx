@@ -1,5 +1,5 @@
 import React from 'react';
-import { defaultProjects } from "../../Data/ProjectData";
+import { defaultProjects } from "../../../data/ProjectData";
 import { Folder } from "lucide-react";
 
 export const Projects = ({ projects = defaultProjects }) => {

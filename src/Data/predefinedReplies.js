@@ -29,20 +29,13 @@ const predefinedReplies = [
   },
 
   {
-    keywords: [
-      "contact",
-      "email",
-      "linkedin",
-      "reach you",
-      "socials",
-      "connect",
-    ],
+    keywords: ["contact", "email", "linkedin", "reach you", "socials", "connect"],
     reply:
       "You can reach me through the social links on my portfolio — including LinkedIn and email.",
   },
 
   {
-    keywords: ["OJT", "Practicum"],
+    keywords: ["OJT", "Practicum", "Internship"],
     reply:
       "I completed an administrative assistant practicum for the SHS/JHS High School principal at Lyceum of Alabang.",
   },

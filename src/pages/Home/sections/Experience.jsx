@@ -1,5 +1,5 @@
 import React from 'react';
-import { resumeData } from "../../Data/resumeData";
+import { resumeData } from "../../../data/resumeData";
 import { Briefcase } from "lucide-react";
 
 const TimelineItem = ({ item, isFirst, isLast }) => {
@@ -7,23 +7,23 @@ const TimelineItem = ({ item, isFirst, isLast }) => {
     <div className="flex gap-4">
       <div className="flex flex-col items-center w-5">
         {!isFirst && (
-          <div className="w-0.5 h-2 bg-[var(--border)]" />
+          <div className="w-0.5 h-2 bg-(--border)" />
         )}
         {isFirst && <div className="h-2" />}
-        <div className="w-2 h-2 rounded-full bg-[var(--border)] shrink-0" />
+        <div className="w-2 h-2 rounded-full bg-(--border) shrink-0" />
         {!isLast && (
-          <div className="w-0.5 flex-1 bg-[var(--border)]" />
+          <div className="w-0.5 flex-1 bg-(--border)" />
         )}
       </div>
 
       <div className="flex-1 pb-4"> 
-        <h3 className="font-semibold text-[var(--text-primary)]">
+        <h3 className="font-semibold text-(--text-primary)">
           {item.title}
         </h3>
-        <p className="text-sm text-[var(--text-primary)]">{item.place}</p>
+        <p className="text-sm text-(--text-primary)">{item.place}</p>
       </div>
 
-      <div className="text-xs text-[var(--text-secondary)] whitespace-nowrap">
+      <div className="text-xs text-(--text-secondary) whitespace-nowrap">
         {item.date}
       </div>
     </div>
@@ -39,7 +39,7 @@ export const Experience = () => {
     <section>
       <h2 className="mb-4 flex items-center gap-2 text-xl font-thin text-[var(--text-primary)]">
         <Briefcase className="h-5 w-5" />
-        Experience
+        Experience & Education
       </h2>
 
       <div>

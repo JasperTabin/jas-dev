@@ -1,10 +1,9 @@
 import React from 'react';
-import { useTheme } from "./components/useTheme";
+import { useTheme } from "../components/Theme/useTheme";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { HomePage } from "./components/pages/Homepage";
-import { ProjectsPage } from "./components/pages/ProjectsPage";
-import { Chatbot } from "./components/Chatbot"; 
-// import { Test } from './components/sections/test';
+import { HomePage } from "../pages/Home/HomePage.jsx";
+import { ProjectsPage } from "../pages/Projects/ProjectsPage.jsx";
+import { Chatbot } from "../components/Chatbot/Chatbot.jsx"; 
 
 function AppContent() {
   return (
@@ -16,7 +15,6 @@ function AppContent() {
         </Routes>
       </main>
       <Chatbot />
-      {/* <Test /> */}
     </>
   );
 }

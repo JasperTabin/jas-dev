@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { AllProjects } from "../sections/AllProjects";
+import { AllProjects } from "../Projects/sections/AllProjects";
 
 export function ProjectsPage() {
   // GSAP Animation

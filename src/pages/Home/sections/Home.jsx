@@ -2,7 +2,7 @@
 
 import React from "react";
 import { MapPin } from "lucide-react";
-import { ThemeToggle } from "../ThemeToggle";
+import { ThemeToggle } from "../../../components/Theme/ThemeToggle";
 
 export const Home = () => {
   return (
