@@ -37,7 +37,7 @@ export const Experience = () => {
 
   return (
     <section>
-      <h2 className="mb-4 flex items-center gap-2 text-xl font-thin text-[var(--text-primary)]">
+      <h2 className="mb-4 flex items-center gap-2 text-xl font-thin text-(--text-primary)">
         <Briefcase className="h-5 w-5" />
         Experience & Education
       </h2>

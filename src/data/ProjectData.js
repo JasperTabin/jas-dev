@@ -18,8 +18,24 @@ export const defaultProjects = [
     ],
   },
 
-  {
+    {
     id: 2,
+    title: "FURŌ",
+    description:
+      "pomodoro Timer",
+    image: "/Furo.jpg",
+    links: [
+      {
+        label: "Visit",
+        url: "https://furoflow.vercel.app/",
+        displayName: "Click me",
+        type: "primary",
+      },
+    ],
+  },
+
+  {
+    id: 3,
     title: "Urban Web",
     description:
       "A 3rd Yr Porject",
@@ -35,7 +51,7 @@ export const defaultProjects = [
   },
 
   {
-    id: 3,
+    id: 4,
     title: "Cat Maze Game",
     description:
       "Cat Game",
@@ -49,4 +65,6 @@ export const defaultProjects = [
       },
     ],
   },
+
+
 ];
