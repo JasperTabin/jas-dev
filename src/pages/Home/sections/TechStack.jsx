@@ -3,7 +3,7 @@ import { Code } from "lucide-react";
 
 const techStack = {
   Frontend: ["HTML/CSS", "JavaScript", "TypeScript", "React", "Tailwind CSS", "Vite"],
-  Backend: ["Node.js", "PHP", "MongoDB", "MySQL"],
+  // Backend: ["Node.js", "PHP", "MongoDB", "MySQL"],
   "Tools & Others": ["Git/GitHub", "Vercel", "Canva", "Figma", "VS Code"],
 };
 
