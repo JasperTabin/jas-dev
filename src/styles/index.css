@@ -1,26 +1,32 @@
 @import "tailwindcss";
 
 :root {
-  /* Light theme variables */
   --primary: #ffffff;
   --secondary: #0a0a0a;
   --border: #404040;
   --text-primary: #000000;
   --text-secondary: #666666;
-  --font-body: 'Signika Negative', sans-serif;
-  --tagline-bg: #0a0a0a;   
-  --tagline-text: #ffffff; 
+  --text-tertiary: #999999; /* add */
+  --bg-card: #ffffff; /* add */
+  --bg-tag: #f1f1f1; /* add */
+  --bg-hover: #f5f5f5; /* add */
+  --font-body: "Signika Negative", sans-serif;
+  --tagline-bg: #0a0a0a;
+  --tagline-text: #ffffff;
 }
 
 .dark {
-  /* Dark theme variables */
   --primary: #0a0a0a;
   --secondary: #ffffff;
   --border: #404040;
   --text-primary: #ffffff;
   --text-secondary: #cccccc;
-  --tagline-bg: #ffffff;   
-  --tagline-text: #0a0a0a; 
+  --text-tertiary: #777777; /* add */
+  --bg-card: #141414; /* add */
+  --bg-tag: #1e1e1e; /* add */
+  --bg-hover: #1a1a1a; /* add */
+  --tagline-bg: #ffffff;
+  --tagline-text: #0a0a0a;
 }
 
 body {
@@ -28,15 +34,27 @@ body {
   color: var(--text-primary);
   font-family: var(--font-body);
   scroll-behavior: smooth;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 @keyframes wave {
-  0%   { transform: rotate(0deg); }
-  25%  { transform: rotate(20deg); }
-  50%  { transform: rotate(-15deg); }
-  75%  { transform: rotate(15deg); }
-  100% { transform: rotate(0deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(20deg);
+  }
+  50% {
+    transform: rotate(-15deg);
+  }
+  75% {
+    transform: rotate(15deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 .hand-wave {
@@ -47,7 +65,6 @@ body {
 .hand-wave:hover {
   animation: wave 1.5s ease-in-out infinite;
 }
-
 
 .chat-scroll::-webkit-scrollbar {
   width: 6px;
