@@ -9,7 +9,7 @@ export const Home = () => {
     <section id="profile">
       <div className="flex items-center gap-6">
         <img
-          src="/Profile2.png"
+          src="/Profile.png"
           alt="Jasper Tabin"
           loading="lazy"
           className="h-25 w-25 rounded-lg object-cover object-[center_20%]"
