@@ -1,6 +1,48 @@
 import React from 'react';
 import { defaultProjects } from "../../../data/ProjectData";
-import { Folder } from "lucide-react";
+import { Code2, Folder, Smartphone } from "lucide-react";
+import {
+  SiArduino,
+  SiCss3,
+  SiEspressif,
+  SiFirebase,
+  SiFramer,
+  SiJavascript,
+  SiReact,
+  SiTailwindcss,
+  SiTypescript,
+} from "react-icons/si";
+
+const TAG_ICON_MAP = {
+  "MIT App Inventor": { Icon: Smartphone, color: "#8BC34A" },
+  Firebase: { Icon: SiFirebase, color: "#FFCA28" },
+  ESP32: { Icon: SiEspressif, color: "#E7352C" },
+  "Arduino IDE": { Icon: SiArduino, color: "#00878F" },
+  "React (Vite)": { Icon: SiReact, color: "#61DAFB" },
+  "React (Native)": { Icon: SiReact, color: "#61DAFB" },
+  "Tailwind CSS": { Icon: SiTailwindcss, color: "#06B6D4" },
+  "Framer Motion": { Icon: SiFramer, color: "#0055FF" },
+  TypeScript: { Icon: SiTypescript, color: "#3178C6" },
+  JavaScript: { Icon: SiJavascript, color: "#F7DF1E" },
+  CSS: { Icon: SiCss3, color: "#1572B6" },
+};
+
+const DEFAULT_TAG_ICON = { Icon: Code2, color: "var(--text-secondary)" };
+
+const ProjectTagIcon = ({ tag }) => {
+  const { Icon, color } = TAG_ICON_MAP[tag] ?? DEFAULT_TAG_ICON;
+
+  return (
+    <span
+      className="inline-flex h-7 w-7 items-center justify-center rounded-md"
+      style={{ backgroundColor: "var(--bg-tag)", color }}
+      title={tag}
+      aria-label={tag}
+    >
+      <Icon className="h-3.5 w-3.5" aria-hidden="true" />
+    </span>
+  );
+};
 
 export const Projects = ({ projects = defaultProjects }) => {
   return (
@@ -55,16 +97,12 @@ export const Projects = ({ projects = defaultProjects }) => {
                   {p.description}
                 </p>
 
-                {mainLink && (
-                  <span
-                    className="inline-block mt-2 px-2 py-0.5 text-[10px] font-mono rounded"
-                    style={{
-                      backgroundColor: "var(--secondary)",
-                      color: "var(--primary)",
-                    }}
-                  >
-                    {mainLink.displayName || mainLink.label}
-                  </span>
+                {p.tags?.length > 0 && (
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {p.tags.map((tag) => (
+                      <ProjectTagIcon key={tag} tag={tag} />
+                    ))}
+                  </div>
                 )}
               </a>
             );

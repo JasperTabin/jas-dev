@@ -3,7 +3,7 @@ export const defaultProjects = [
     id: 1,
     title: "IoT Water Monitoring System",
     description:
-      "Real-time water quality dashboard using sensor data transmitted via IoT hardware.",
+      "An IoT-based water quality monitoring system that uses sensors to detect water conditions in real time and sends data to a mobile app for monitoring and alerts.",
     image: "/Capstone.jpg",
     tags: ["MIT App Inventor", "Firebase", "ESP32", "Arduino IDE"],
     links: [
@@ -19,8 +19,8 @@ export const defaultProjects = [
     id: 2,
     title: "FURŌ",
     description:
-      "A productivity tool to help you organize & focus on your tasks.",
-    image: "/Furo.jpg",
+      "FuroFlow is a productivity web app with a Pomodoro timer, task management, and calendar features to help users stay organized and focused.",
+    image: "/Furo.png",
     tags: ["React (Vite)", "Tailwind CSS", "Framer Motion", "TypeScript"],
     links: [
       {
