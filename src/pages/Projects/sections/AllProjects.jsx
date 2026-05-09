@@ -39,12 +39,12 @@ const ProjectTagIcon = ({ tag }) => {
 
   return (
     <span
-      className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-(--bg-tag)"
-      style={{ color }}
+      className="inline-flex h-7 w-7 items-center justify-center rounded-md"
+      style={{ backgroundColor: "var(--bg-tag)", color }}
       title={tag}
       aria-label={tag}
     >
-      <Icon className="h-4 w-4" aria-hidden="true" />
+      <Icon className="h-3.5 w-3.5" aria-hidden="true" />
     </span>
   );
 };
@@ -54,8 +54,14 @@ const ProjectCard = memo(({ project }) => {
   if (!visitLink) return null;
 
   return (
-    <article className="project-card overflow-hidden rounded-xl border border-(--border) bg-(--bg-card)">
-      <div className="relative aspect-video w-full overflow-hidden">
+    <article className="flex h-full flex-col overflow-hidden rounded-[10px] border border-(--border) bg-(--bg-card) text-inherit transition-transform duration-200 hover:-translate-y-1">
+      <a
+        href={visitLink.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Open ${project.title}`}
+        className="block aspect-video shrink-0 overflow-hidden"
+      >
         <img
           src={project.image}
           alt={`${project.title} preview`}
@@ -63,27 +69,19 @@ const ProjectCard = memo(({ project }) => {
           decoding="async"
           className="h-full w-full object-cover"
         />
+      </a>
 
-        <a
-          href={visitLink.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`Open ${project.title}`}
-          className="absolute inset-0"
-        />
-      </div>
-
-      <div className="flex flex-col gap-4 p-6">
-        <h3 className="text-base font-semibold leading-snug text-(--text-primary)">
+      <div className="flex flex-1 flex-col px-4 pt-3.5 pb-4">
+        <h3 className="min-h-[34px] text-[13px] leading-snug font-bold text-(--text-primary)">
           {project.title}
         </h3>
 
-        <p className="text-sm leading-relaxed text-(--text-secondary)">
+        <p className="text-[11px] leading-[1.65] text-(--text-secondary)">
           {project.description}
         </p>
 
         {project.tags.length > 0 && (
-          <div className="flex flex-wrap gap-2">
+          <div className="mt-auto flex flex-wrap gap-2 pt-5">
             {project.tags.map((tag) => (
               <ProjectTagIcon key={tag} tag={tag} />
             ))}
@@ -115,7 +113,7 @@ export const AllProjects = () => {
         </div>
       </header>
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {defaultProjects.map((project) => (
           <ProjectCard key={project.id} project={project} />
         ))}
