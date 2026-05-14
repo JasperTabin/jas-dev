@@ -1,7 +1,7 @@
 export const defaultProjects = [
   {
     id: 1,
-    title: "IoT Water Monitoring System",
+    title: "IoT Water Monitoring System (Capstone)",
     description:
       "An IoT-based water quality monitoring system that uses sensors to detect water conditions in real time and sends data to a mobile app for monitoring and alerts.",
     image: "/Capstone.jpg",

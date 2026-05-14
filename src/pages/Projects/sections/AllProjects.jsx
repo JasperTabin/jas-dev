@@ -72,7 +72,7 @@ const ProjectCard = memo(({ project }) => {
       </a>
 
       <div className="flex flex-1 flex-col px-4 pt-3.5 pb-4">
-        <h3 className="min-h-[34px] text-[13px] leading-snug font-bold text-(--text-primary)">
+        <h3 className="min-h-8.5 text-[13px] leading-snug font-bold text-(--text-primary)">
           {project.title}
         </h3>
 
